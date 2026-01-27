@@ -1,4 +1,3 @@
-// @ts-expect-error process is a nodejs global
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
