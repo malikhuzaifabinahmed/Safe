@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Lock, Unlock, Shield, X, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Lock, Unlock, X, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import safeIcon from '@/assets/icon.png';
 
 interface SafeManagerProps {
   safePath: string;
@@ -123,7 +124,7 @@ export function SafeManager({ safePath, password, onLogout }: SafeManagerProps) 
         <div className="flex items-center justify-between mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
           <div className="flex items-center gap-3">
             <div className="p-3 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-2xl shadow-lg">
-              <Shield className="w-6 h-6 text-white" />
+              <img src={safeIcon} alt="Safe" className="w-6 h-6" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Safe Manager</h1>

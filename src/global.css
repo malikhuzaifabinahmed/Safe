@@ -3,6 +3,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Transparent background for frameless window */
+html, body, #root {
+  background: transparent !important;
+  overflow: hidden;
+}
+
 /* Custom Animations */
 @keyframes bounce-subtle {
   0%, 100% {

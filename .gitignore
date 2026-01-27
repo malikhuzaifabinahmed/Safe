@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Rust / Tauri build artifacts
+src-tauri/target/
+*.pdb
+*.dll
+*.exe
+*.rlib
+*.d
+
+# OS files
+Thumbs.db
+Desktop.ini

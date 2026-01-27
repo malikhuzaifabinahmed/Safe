@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Shield, ArrowRight, FolderOpen, Lock } from 'lucide-react';
+import { ArrowRight, FolderOpen, Lock } from 'lucide-react';
+import safeIcon from '@/assets/icon.png';
 
 interface SafePathInputProps {
   onAuthenticated: (path: string, password: string) => void;
@@ -67,7 +68,7 @@ export function SafePathInput({ onAuthenticated }: SafePathInputProps) {
           <div className="relative mb-4">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-xl opacity-60 animate-pulse" />
             <div className="relative p-4 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
-              <Shield className="w-12 h-12 text-white" />
+              <img src={safeIcon} alt="Safe" className="w-12 h-12" />
             </div>
           </div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
