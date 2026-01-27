@@ -141,10 +141,13 @@ export function SafeWidget() {
         
         {/* Header Bar - Draggable */}
         <div 
-          className="flex items-center justify-between px-3 py-2 border-b border-slate-200/50 dark:border-slate-700/50 cursor-move select-none"
-          onMouseDown={handleDragStart}
+          className="flex items-center justify-between px-3 py-2 border-b border-slate-200/50 dark:border-slate-700/50 select-none"
         >
-          <div className="flex items-center gap-2">
+          {/* Left side - Draggable area */}
+          <div 
+            className="flex items-center gap-2 cursor-move flex-1"
+            onMouseDown={handleDragStart}
+          >
             <GripVertical className="w-3 h-3 text-slate-400 dark:text-slate-500" />
             <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-md">
               <img src={safeIcon} alt="Safe" className="w-4 h-4" />
@@ -152,10 +155,12 @@ export function SafeWidget() {
             <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">Safe</span>
           </div>
           
+          {/* Right side - Buttons (not draggable) */}
           <div className="flex items-center gap-1">
             <ThemeToggle />
             <button 
               onClick={handleClose}
+              onMouseDown={(e) => e.stopPropagation()}
               className="p-1.5 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors group"
             >
               <X className="w-3.5 h-3.5 text-slate-400 group-hover:text-red-500 transition-colors" />
