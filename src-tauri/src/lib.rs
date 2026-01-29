@@ -105,6 +105,7 @@ fn encrypt_directory(path: String, password: String) -> Result<String, String> {
     }
     
     let mut encrypted_count = 0;
+    let mut skipped_count = 0;
     let mut errors = Vec::new();
     
     // Walk through all files in directory
@@ -114,6 +115,14 @@ fn encrypt_directory(path: String, password: String) -> Result<String, String> {
         .filter(|e| e.file_type().is_file())
     {
         let file_path = entry.path();
+        
+        // Skip files that are already encrypted
+        if is_file_encrypted(file_path) {
+            skipped_count += 1;
+            println!("Skipped (already encrypted): {:?}", file_path);
+            continue;
+        }
+        
         match encrypt_file(file_path, &password) {
             Ok(_) => {
                 encrypted_count += 1;
@@ -126,7 +135,7 @@ fn encrypt_directory(path: String, password: String) -> Result<String, String> {
     }
     
     if errors.is_empty() {
-        Ok(format!("Successfully encrypted {} files", encrypted_count))
+        Ok(format!("Successfully encrypted {} files ({} skipped - already encrypted)", encrypted_count, skipped_count))
     } else {
         Err(format!("Encrypted {} files with {} errors: {}", 
             encrypted_count, errors.len(), errors.join(", ")))
@@ -142,6 +151,7 @@ fn decrypt_directory(path: String, password: String) -> Result<String, String> {
     }
     
     let mut decrypted_count = 0;
+    let mut skipped_count = 0;
     let mut errors = Vec::new();
     
     // Walk through all files in directory
@@ -151,6 +161,14 @@ fn decrypt_directory(path: String, password: String) -> Result<String, String> {
         .filter(|e| e.file_type().is_file())
     {
         let file_path = entry.path();
+        
+        // Skip files that are not encrypted
+        if !is_file_encrypted(file_path) {
+            skipped_count += 1;
+            println!("Skipped (not encrypted): {:?}", file_path);
+            continue;
+        }
+        
         match decrypt_file(file_path, &password) {
             Ok(_) => {
                 decrypted_count += 1;
@@ -163,7 +181,7 @@ fn decrypt_directory(path: String, password: String) -> Result<String, String> {
     }
     
     if errors.is_empty() {
-        Ok(format!("Successfully decrypted {} files", decrypted_count))
+        Ok(format!("Successfully decrypted {} files ({} skipped - not encrypted)", decrypted_count, skipped_count))
     } else {
         Err(format!("Decrypted {} files with {} errors: {}", 
             decrypted_count, errors.len(), errors.join(", ")))
