@@ -135,7 +135,7 @@ fn encrypt_directory(path: String, password: String) -> Result<String, String> {
     }
     
     if errors.is_empty() {
-        Ok(format!("Successfully encrypted {} files ({} already encrypted)", encrypted_count, skipped_count))
+        Ok(format!("Successfully encrypted {} files ({} skipped - already encrypted)", encrypted_count, skipped_count))
     } else {
         Err(format!("Encrypted {} files with {} errors: {}", 
             encrypted_count, errors.len(), errors.join(", ")))
@@ -181,7 +181,7 @@ fn decrypt_directory(path: String, password: String) -> Result<String, String> {
     }
     
     if errors.is_empty() {
-        Ok(format!("Successfully decrypted {} files ({} already decrypted)", decrypted_count, skipped_count))
+        Ok(format!("Successfully decrypted {} files ({} skipped - not encrypted)", decrypted_count, skipped_count))
     } else {
         Err(format!("Decrypted {} files with {} errors: {}", 
             decrypted_count, errors.len(), errors.join(", ")))
